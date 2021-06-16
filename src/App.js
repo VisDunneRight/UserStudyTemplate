@@ -1,9 +1,8 @@
 import './App.css';
+import Section from './Section'
 
 function App() {
-  return (
-    <></>
-  );
+  return <Section/>;
 }
 
 export default App;
