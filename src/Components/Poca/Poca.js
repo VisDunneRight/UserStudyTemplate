@@ -5,7 +5,7 @@ import useResizeObserver from "../useResizeObserver";
 import "./style.css";
 
 const margin = { top: 20, right: 30, bottom: 30, left: 30 };
-
+const posX = [50, 100];
 const Poca = ({ question, domain }) => {
   const svgRef = useRef();
   const wrapperRef = useRef();
@@ -22,17 +22,18 @@ const Poca = ({ question, domain }) => {
     svg.attr("viewBox", [0, 0, width, height]);
     const g = svg.select("g");
     const axis = [
-      [margin.left, domain[0]],
-      [margin.left, domain[1]],
-      [width - margin.right, domain[1]],
+      [margin.left, domain[0] + margin.top],
+      [margin.left, domain[1] + margin.top],
+      [width - margin.right, domain[1] + margin.top],
     ];
     let data = [];
+    const chartHeight = domain[1] + margin.top;
     if (question.sizes[2] === 0) {
-      data.push([50, question.sizes[0], "100"]);
-      data.push([100, question.sizes[1], "?"]);
+      data.push([posX[0], chartHeight - question.sizes[0], "100"]);
+      data.push([posX[1], chartHeight - question.sizes[1], "?"]);
     } else {
-      data.push([50, question.sizes[1], "100"]);
-      data.push([100, question.sizes[0], "?"]);
+      data.push([posX[0], chartHeight - question.sizes[1], "100"]);
+      data.push([posX[1], chartHeight - question.sizes[0], "?"]);
     }
 
     //Data rename
@@ -63,7 +64,7 @@ const Poca = ({ question, domain }) => {
       .attr("x", (d) => {
         return d[0];
       })
-      .attr("y", (d) => height - margin.bottom)
+      .attr("y", (d) => height)
       .attr("text-anchor", "middle");
   }, [dimensions, domain, question]);
 

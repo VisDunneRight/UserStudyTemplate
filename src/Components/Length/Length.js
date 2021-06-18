@@ -22,29 +22,55 @@ const Length = ({ question, domain }) => {
     svg.attr("viewBox", [0, 0, width, height]);
     const g = svg.select("g");
     const axis = [
-      [margin.left, domain[0]],
-      [margin.left, domain[1]],
-      [width - margin.right, domain[1]],
+      [margin.left, domain[0] + margin.top],
+      [margin.left, domain[1] + margin.top],
+      [width - margin.right, domain[1] + margin.top],
     ];
+    const chartHeight = domain[1] + margin.top;
     let data = [];
     if (question.sizes[2] === 0) {
-      data.push([50, question.sizes[0], "100"]);
-      data.push([100, question.sizes[1], "?"]);
+      data.push([
+        50,
+        chartHeight - question.sizes[3] - question.sizes[0],
+        25,
+        question.sizes[0],
+        "100",
+      ]);
+      data.push([
+        100,
+        chartHeight - question.sizes[4] - question.sizes[1],
+        25,
+        question.sizes[1],
+        "?",
+      ]);
     } else {
-      data.push([50, question.sizes[1], "100"]);
-      data.push([100, question.sizes[0], "?"]);
+      data.push([
+        50,
+        chartHeight - question.sizes[4] - question.sizes[1],
+        25,
+        question.sizes[1],
+        "100",
+      ]);
+      data.push([
+        100,
+        chartHeight - question.sizes[3] - question.sizes[0],
+        25,
+        question.sizes[0],
+        "?",
+      ]);
     }
 
     //Data rename
-    g.selectAll(".point")
+    g.selectAll(".rect")
       .data(data)
-      .join("circle")
-      .attr("class", "point")
+      .join("rect")
+      .attr("class", "rect")
       .attr("stroke", "#000")
-      .attr("cx", (d) => d[0])
-      .attr("cy", (d) => d[1])
-      .attr("fill", "black")
-      .attr("r", 5);
+      .attr("x", (d) => d[0])
+      .attr("y", (d) => d[1])
+      .attr("width", (d) => d[2])
+      .attr("height", (d) => d[3])
+      .attr("fill", "black");
 
     const axisLine = d3.line();
     g.selectAll("path")
@@ -59,11 +85,11 @@ const Length = ({ question, domain }) => {
       .join("text")
       .style("opacity", 1)
       .attr("class", "mytooltip")
-      .text((d) => d[2])
+      .text((d) => d[4])
       .attr("x", (d) => {
-        return d[0];
+        return d[0] + d[2] / 2;
       })
-      .attr("y", (d) => height - margin.bottom)
+      .attr("y", (d) => height)
       .attr("text-anchor", "middle");
   }, [dimensions, domain, question]);
 

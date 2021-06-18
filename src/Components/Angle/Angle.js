@@ -5,6 +5,33 @@ import useResizeObserver from "../useResizeObserver";
 import "./style.css";
 
 const margin = { top: 20, right: 30, bottom: 30, left: 30 };
+const cordLength = 80;
+
+const drawAngle = (g, svg, data, translate, name, symbol) => {
+  const radialLineGen = d3.lineRadial();
+  const axisLine = radialLineGen(data);
+  g.selectAll(".path_" + name)
+    .data([data])
+    .join("path")
+    .attr("class", "path_" + name)
+    .attr("d", axisLine)
+    .attr("fill", "none")
+    .attr("stroke", "black");
+
+  svg
+    .selectAll(".path_" + name)
+    .attr("transform", `translate(${translate[0]}, ${translate[1]})`);
+
+  g.selectAll(".mytooltip_" + name)
+    .data([translate])
+    .join("text")
+    .style("opacity", 1)
+    .attr("class", "mytooltip_" + name)
+    .text((d) => symbol)
+    .attr("x", (d) => d[0])
+    .attr("y", (d) => d[1] + cordLength + margin.bottom / 2)
+    .attr("text-anchor", "middle");
+};
 
 const Angle = ({ question, domain }) => {
   const svgRef = useRef();
@@ -21,50 +48,26 @@ const Angle = ({ question, domain }) => {
     const svg = d3.select(svgRef.current);
     svg.attr("viewBox", [0, 0, width, height]);
     const g = svg.select("g");
-    const axis = [
-      [margin.left, domain[0]],
-      [margin.left, domain[1]],
-      [width - margin.right, domain[1]],
-    ];
+
+    console.log("test");
     let data = [];
     if (question.sizes[2] === 0) {
-      data.push([50, question.sizes[0], "100"]);
-      data.push([100, question.sizes[1], "?"]);
+      data.push([question.sizes[3], cordLength]);
+      data.push([question.sizes[3], 0]);
+      data.push([question.sizes[3] + question.sizes[0], cordLength]);
+      data.push([question.sizes[4], cordLength]);
+      data.push([question.sizes[4], 0]);
+      data.push([question.sizes[4] + question.sizes[1], cordLength]);
     } else {
-      data.push([50, question.sizes[1], "100"]);
-      data.push([100, question.sizes[0], "?"]);
+      data.push([question.sizes[4], cordLength]);
+      data.push([question.sizes[4], 0]);
+      data.push([question.sizes[4] + question.sizes[1], cordLength]);
+      data.push([question.sizes[3], cordLength]);
+      data.push([question.sizes[3], 0]);
+      data.push([question.sizes[3] + question.sizes[1], cordLength]);
     }
-
-    //Data rename
-    g.selectAll(".point")
-      .data(data)
-      .join("circle")
-      .attr("class", "point")
-      .attr("stroke", "#000")
-      .attr("cx", (d) => d[0])
-      .attr("cy", (d) => d[1])
-      .attr("fill", "black")
-      .attr("r", 5);
-
-    const axisLine = d3.line();
-    g.selectAll("path")
-      .data([axis])
-      .join("path")
-      .attr("d", (value) => axisLine(value))
-      .attr("fill", "none")
-      .attr("stroke", "black");
-
-    g.selectAll(".mytooltip")
-      .data(data)
-      .join("text")
-      .style("opacity", 1)
-      .attr("class", "mytooltip")
-      .text((d) => d[2])
-      .attr("x", (d) => {
-        return d[0];
-      })
-      .attr("y", (d) => height - margin.bottom)
-      .attr("text-anchor", "middle");
+    drawAngle(g, svg, data.slice(0, 3), [100, 100], "radial1", "100");
+    drawAngle(g, svg, data.slice(3, 6), [200, 100], "radial2", "?");
   }, [dimensions, domain, question]);
 
   return (

@@ -6,6 +6,9 @@ import "./style.css";
 
 const margin = { top: 20, right: 30, bottom: 30, left: 30 };
 
+const posX = [150, 400];
+const posY = [150, 150];
+
 const Area = ({ question, domain }) => {
   const svgRef = useRef();
   const wrapperRef = useRef();
@@ -21,18 +24,14 @@ const Area = ({ question, domain }) => {
     const svg = d3.select(svgRef.current);
     svg.attr("viewBox", [0, 0, width, height]);
     const g = svg.select("g");
-    const axis = [
-      [margin.left, domain[0]],
-      [margin.left, domain[1]],
-      [width - margin.right, domain[1]],
-    ];
+    const chartHeight = domain[1] * 2 + margin.top;
     let data = [];
     if (question.sizes[2] === 0) {
-      data.push([50, question.sizes[0], "100"]);
-      data.push([100, question.sizes[1], "?"]);
+      data.push([posX[0], chartHeight - posY[0], question.sizes[0], "100"]);
+      data.push([posX[1], chartHeight - posY[1], question.sizes[1], "?"]);
     } else {
-      data.push([50, question.sizes[1], "100"]);
-      data.push([100, question.sizes[0], "?"]);
+      data.push([posX[0], chartHeight - posY[0], question.sizes[1], "100"]);
+      data.push([posX[1], chartHeight - posY[1], question.sizes[0], "?"]);
     }
 
     //Data rename
@@ -44,37 +43,29 @@ const Area = ({ question, domain }) => {
       .attr("cx", (d) => d[0])
       .attr("cy", (d) => d[1])
       .attr("fill", "black")
-      .attr("r", 5);
-
-    const axisLine = d3.line();
-    g.selectAll("path")
-      .data([axis])
-      .join("path")
-      .attr("d", (value) => axisLine(value))
-      .attr("fill", "none")
-      .attr("stroke", "black");
+      .attr("r", (d) => d[2]);
 
     g.selectAll(".mytooltip")
       .data(data)
       .join("text")
       .style("opacity", 1)
       .attr("class", "mytooltip")
-      .text((d) => d[2])
+      .text((d) => d[3])
       .attr("x", (d) => {
         return d[0];
       })
       .attr("y", (d) => height - margin.bottom)
       .attr("text-anchor", "middle");
   }, [dimensions, domain, question]);
-
+  console.log(domain);
   return (
     <Row>
       <div
         ref={wrapperRef}
         style={{
           marginBottom: "2rem",
-          width: "400px",
-          height: domain[1] + margin.top + margin.bottom,
+          width: "600px",
+          height: domain[1] * 2 + margin.top + margin.bottom,
         }}
       >
         <svg ref={svgRef}>

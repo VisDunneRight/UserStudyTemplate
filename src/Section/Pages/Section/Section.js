@@ -49,6 +49,7 @@ const Section = ({ page, data, nextPage }) => {
   }, [data, page]);
 
   const typeRendering = (data, array, index, domain) => {
+    console.log(data.type);
     switch (data.type) {
       case "POCA":
         return <Poca question={array[index]} domain={domain} />;
@@ -57,9 +58,9 @@ const Section = ({ page, data, nextPage }) => {
       case "Area":
         return <Area question={array[index]} domain={domain} />;
       case "Length":
-        return <Poca question={array[index]} domain={domain} />;
+        return <Length question={array[index]} domain={domain} />;
       case "POUA":
-        return <Poca question={array[index]} domain={domain} />;
+        return <Poua question={array[index]} domain={domain} />;
       default:
         throw new Error("Missing type of testing Section.");
     }
