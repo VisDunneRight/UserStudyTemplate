@@ -1,6 +1,7 @@
 {
   "meta": {
-    "progressbar": true
+    "progressbar": true,
+    "sessionID" : "Participant ID"
   },
   "pages": [
     {
@@ -9,7 +10,7 @@
       "attributes": [
         {
           "label": "Participant ID",
-          "Type": "id"
+          "Type": "text"
         },
         {
           "label": "Participant Name",
@@ -46,11 +47,13 @@
     },
     {
       "type": "Section",
-      "position": 0
+      "position": 0,
+      "storeValues":  ["type"],
+      "valuesUsed": ["proportionOrder", "sizes", "Question"]
     },
     {
       "title": "",
-      "Type": "Break",
+      "type": "Break",
       "text": [
         "Good job on completing that section.",
         "This is your chance to take a break if you would like or if you are ready to tackle more questions, just hit next."
@@ -58,7 +61,51 @@
     },
     {
       "type": "Section",
-      "position": 1
+      "position": 1,
+      "storeValues":  ["type"],
+      "valuesUsed": ["proportionOrder", "sizes", "Question"]
+    },
+    {
+      "title": "",
+      "type": "Break",
+      "text": [
+        "Good job on completing that section.",
+        "This is your chance to take a break if you would like or if you are ready to tackle more questions, just hit next."
+      ]
+    },
+    {
+      "type": "Section",
+      "position": 2,
+      "storeValues":  ["type"],
+      "valuesUsed": ["proportionOrder", "sizes", "Question"]
+    },
+    {
+      "title": "",
+      "type": "Break",
+      "text": [
+        "Good job on completing that section.",
+        "This is your chance to take a break if you would like or if you are ready to tackle more questions, just hit next."
+      ]
+    },
+    {
+      "type": "Section",
+      "position": 3,
+      "storeValues":  ["type"],
+      "valuesUsed": ["proportionOrder", "sizes", "Question"]
+    },
+    {
+      "title": "",
+      "type": "Break",
+      "text": [
+        "Good job on completing that section.",
+        "This is your chance to take a break if you would like or if you are ready to tackle more questions, just hit next."
+      ]
+    },
+    {
+      "type": "Section",
+      "position": 4,
+      "storeValues":  ["type"],
+      "valuesUsed": ["proportionOrder", "sizes", "Question"]
     }
   ]
 }
