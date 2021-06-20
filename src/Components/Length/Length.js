@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from "react";
-import { Row } from "react-bootstrap";
 import * as d3 from "d3";
 import useResizeObserver from "../useResizeObserver";
 import "./style.css";
@@ -94,20 +93,18 @@ const Length = ({ question, domain }) => {
   }, [dimensions, domain, question]);
 
   return (
-    <Row>
-      <div
-        ref={wrapperRef}
-        style={{
-          marginBottom: "2rem",
-          width: "400px",
-          height: domain[1] + margin.top + margin.bottom,
-        }}
-      >
-        <svg ref={svgRef}>
-          <g />
-        </svg>
-      </div>
-    </Row>
+    <div
+      ref={wrapperRef}
+      style={{
+        marginBottom: "2rem",
+        width: "400px",
+        height: domain[1] + margin.top + margin.bottom,
+      }}
+    >
+      <svg ref={svgRef}>
+        <g />
+      </svg>
+    </div>
   );
 };
 

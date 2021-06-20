@@ -4,7 +4,7 @@ import Information from "./Information/Information";
 import Break from "./Break/Break";
 import Section from "./Section/Section";
 
-const Option = ({ page, data, grabInformation, nextPage }) => {
+const Option = ({ page, data, grabInformation, saveAnswer, nextPage }) => {
   if (page.type === "Demographic") {
     return (
       <Demographics
@@ -17,7 +17,12 @@ const Option = ({ page, data, grabInformation, nextPage }) => {
     return <Information page={page} nextPage={nextPage} />;
   } else if (page.type === "Section") {
     return (
-      <Section page={page} data={data[page.position]} nextPage={nextPage} />
+      <Section
+        page={page}
+        data={data[page.position]}
+        saveAnswer={saveAnswer}
+        nextPage={nextPage}
+      />
     );
   } else if (page.type === "Break") {
     return <Break page={page} nextPage={nextPage} />;
@@ -33,7 +38,9 @@ const Pages = ({
   grabInformation,
   currPage,
   sessionID,
+  saveAnswer,
   nextPage,
+  exportStudy,
 }) => {
   return (
     <>
@@ -43,6 +50,7 @@ const Pages = ({
           page={siteStructure.pages[currPage]}
           data={data[sessionID]}
           grabInformation={grabInformation}
+          saveAnswer={saveAnswer}
           nextPage={nextPage}
         />
       )}

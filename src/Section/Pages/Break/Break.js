@@ -6,10 +6,9 @@ const Break = ({ page, nextPage }) => {
       <Row>
         <h1>{page.title}</h1>
       </Row>
-      <Row>
-        <pre>{page.text}</pre>
-      </Row>
-      <Button variant="primary" onClick={nextPage}>
+      <pre>{page.text}</pre>
+      {/* </Row> */}
+      <Button variant="secondary" onClick={nextPage}>
         Next
       </Button>{" "}
     </>

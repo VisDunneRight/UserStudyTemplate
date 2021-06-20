@@ -1,5 +1,6 @@
 import { Button, Form, Col } from "react-bootstrap";
 import { useState } from "react";
+import { MyRow } from "./style";
 
 const Demographics = ({ page, nextPage, grabInformation }) => {
   const [values, setValues] = useState({});
@@ -18,30 +19,35 @@ const Demographics = ({ page, nextPage, grabInformation }) => {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <Form.Row>
+      <MyRow>
         <h1>{page.title}</h1>
-      </Form.Row>
+      </MyRow>
       {page.attributes &&
         page.attributes.map((row, index) => (
-          <div key={index}>
-            <Form.Row>
-              <Form.Group as={Col} controlId={row.label}>
-                <Form.Label>{row.label}</Form.Label>
-                <Col>
-                  <Form.Control
-                    type="text"
-                    value={values[row.label]}
-                    onChange={(e) => onChange(row.label, e.target.value)}
-                    placeholder={row.label}
-                  />
-                </Col>
-              </Form.Group>
-            </Form.Row>
-          </div>
+          <Form.Group key={index} as={MyRow} controlId={row.label}>
+            <Col lg="2">
+              <Form.Label>{row.label}</Form.Label>
+            </Col>
+            <Col lg="2">
+              <Form.Control
+                type="text"
+                value={values[row.label]}
+                onChange={(e) => onChange(row.label, e.target.value)}
+                placeholder={row.label}
+              />
+            </Col>
+          </Form.Group>
         ))}
-      <Button variant="primary" type="submit">
-        Next
-      </Button>{" "}
+      <MyRow>
+        <br />
+      </MyRow>
+      <MyRow>
+        <Col>
+          <Button variant="secondary" type="submit">
+            Next
+          </Button>{" "}
+        </Col>
+      </MyRow>
     </Form>
   );
 };

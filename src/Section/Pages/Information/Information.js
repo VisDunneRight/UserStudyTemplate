@@ -1,16 +1,28 @@
-import { Row, Button } from "react-bootstrap";
+import { Col, Button } from "react-bootstrap";
+import { MyRow } from "./style";
 
 const Information = ({ page, nextPage }) => {
   return (
     <>
-      <Row>
+      <MyRow>
         <h1>{page.title}</h1>
-      </Row>
+      </MyRow>
       {page.text &&
-        page.text.map((line, index) => <Row key={index}>{line}</Row>)}
-      <Button variant="primary" onClick={nextPage}>
-        Next
-      </Button>{" "}
+        page.text.map((line, index) => <MyRow key={index}>{line}</MyRow>)}
+      <MyRow>
+        <br />
+      </MyRow>
+      {page.finish === true ? (
+        <></>
+      ) : (
+        <MyRow>
+          <Col>
+            <Button variant="secondary" onClick={nextPage}>
+              Next
+            </Button>{" "}
+          </Col>
+        </MyRow>
+      )}
     </>
   );
 };

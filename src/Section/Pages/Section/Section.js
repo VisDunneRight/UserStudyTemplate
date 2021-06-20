@@ -1,14 +1,38 @@
-import { Row, Button } from "react-bootstrap";
+import { Col, Button, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import Poca from "../../../Components/Poca/Poca";
 import Area from "../../../Components/Area/Area";
 import Angle from "../../../Components/Angle/Angle";
 import Length from "../../../Components/Length/Length";
 import Poua from "../../../Components/Poua/Poua";
+import { MyRow } from "./style";
 
-const Section = ({ page, data, nextPage }) => {
+const Section = ({ page, data, saveAnswer, nextPage }) => {
   const [index, setIndex] = useState(0);
   const [array, setArray] = useState([]);
+  const [answer, setAnswer] = useState("");
+
+  const nextQuestion = () => {
+    if (index + 1 === array.length) {
+      nextPage();
+      return;
+    }
+    setIndex((currIndex) => {
+      return currIndex + 1;
+    });
+  };
+
+  function handleNextQuestion(event) {
+    event.preventDefault();
+    const answerName = data.answerName[index].toString();
+    saveAnswer(answerName, answer);
+    setAnswer("");
+    nextQuestion();
+  }
+
+  function onChange(value) {
+    setAnswer(value);
+  }
 
   useEffect(() => {
     let lengths = [];
@@ -49,7 +73,6 @@ const Section = ({ page, data, nextPage }) => {
   }, [data, page]);
 
   const typeRendering = (data, array, index, domain) => {
-    console.log(data.type);
     switch (data.type) {
       case "POCA":
         return <Poca question={array[index]} domain={domain} />;
@@ -65,22 +88,32 @@ const Section = ({ page, data, nextPage }) => {
         throw new Error("Missing type of testing Section.");
     }
   };
-  const nextQuestion = () => {
-    if (index + 1 === array.length) {
-      nextPage();
-      return;
-    }
-    setIndex((currIndex) => {
-      return currIndex + 1;
-    });
-  };
+
   return (
     <>
-      {typeRendering(data, array, index, data.Domain)}
-      <Row>{array[index] && array[index].Question}</Row>
-      <Button variant="primary" onClick={nextQuestion}>
-        Next
-      </Button>{" "}
+      <MyRow>{typeRendering(data, array, index, data.Domain)}</MyRow>
+      <MyRow>{array[index] && array[index].Question}</MyRow>
+      <MyRow>
+        <Col md={2}>
+          <Form.Control
+            type="text"
+            placeholder=""
+            id="Answer"
+            onChange={(e) => onChange(e.target.value)}
+            value={answer}
+          />
+        </Col>
+      </MyRow>
+      <MyRow>
+        <br />
+      </MyRow>
+      <MyRow>
+        <Col>
+          <Button variant="secondary" onClick={handleNextQuestion}>
+            Next
+          </Button>{" "}
+        </Col>
+      </MyRow>
     </>
   );
 };

@@ -1,5 +1,4 @@
 import React, { useRef, useEffect } from "react";
-import { Row } from "react-bootstrap";
 import * as d3 from "d3";
 import useResizeObserver from "../useResizeObserver";
 import "./style.css";
@@ -57,22 +56,19 @@ const Area = ({ question, domain }) => {
       .attr("y", (d) => height - margin.bottom)
       .attr("text-anchor", "middle");
   }, [dimensions, domain, question]);
-  console.log(domain);
   return (
-    <Row>
-      <div
-        ref={wrapperRef}
-        style={{
-          marginBottom: "2rem",
-          width: "600px",
-          height: domain[1] * 2 + margin.top + margin.bottom,
-        }}
-      >
-        <svg ref={svgRef}>
-          <g />
-        </svg>
-      </div>
-    </Row>
+    <div
+      ref={wrapperRef}
+      style={{
+        marginBottom: "2rem",
+        width: "600px",
+        height: domain[1] * 2 + margin.top + margin.bottom,
+      }}
+    >
+      <svg ref={svgRef}>
+        <g />
+      </svg>
+    </div>
   );
 };
 

@@ -53,10 +53,11 @@
     },
     {
       "title": "",
-      "type": "Break",
+      "type": "Information",
       "text": [
-        "Good job on completing that section.",
-        "This is your chance to take a break if you would like or if you are ready to tackle more questions, just hit next."
+        "You are done with section 1 of 5!.",
+        "Feel free to take a short break and relax for a little bit.",
+        "When you are ready, click the start button below to begin section 2 of 5."
       ]
     },
     {
@@ -67,24 +68,26 @@
     },
     {
       "title": "",
-      "type": "Break",
+      "type": "Information",
       "text": [
-        "Good job on completing that section.",
-        "This is your chance to take a break if you would like or if you are ready to tackle more questions, just hit next."
+        "You are done with section 2 of 5!.",
+        "Feel free to take a short break and relax for a little bit.",
+        "When you are ready, click the start button below to begin section 3 of 5."
       ]
     },
     {
-      "type": "Section",
+      "type": "Information",
       "position": 2,
       "storeValues":  ["type"],
       "valuesUsed": ["proportionOrder", "sizes", "Question"]
     },
     {
       "title": "",
-      "type": "Break",
+      "type": "Information",
       "text": [
-        "Good job on completing that section.",
-        "This is your chance to take a break if you would like or if you are ready to tackle more questions, just hit next."
+        "You are done with section 3 of 5!.",
+        "Feel free to take a short break and relax for a little bit.",
+        "When you are ready, click the start button below to begin section 4 of 5."
       ]
     },
     {
@@ -95,10 +98,11 @@
     },
     {
       "title": "",
-      "type": "Break",
+      "type": "Information",
       "text": [
-        "Good job on completing that section.",
-        "This is your chance to take a break if you would like or if you are ready to tackle more questions, just hit next."
+        "You are done with section 4 of 5!.",
+        "Feel free to take a short break and relax for a little bit.",
+        "When you are ready, click the start button below to begin section 5 of 5."
       ]
     },
     {
@@ -106,6 +110,15 @@
       "position": 4,
       "storeValues":  ["type"],
       "valuesUsed": ["proportionOrder", "sizes", "Question"]
+    },
+    {
+      "title": "All Done. Please tell Amy that you are finished.",
+      "type": "Information",
+      "finish": true,
+      "text": [
+        "You are done with section 5 of 5!.",
+        "That is all the sections!! Thank you for help."
+      ]
     }
   ]
 }
