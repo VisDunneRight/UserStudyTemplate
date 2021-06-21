@@ -23,19 +23,27 @@ class Section extends React.Component {
   nextPage = () => {
     const currSession = this.state.currSession;
     currSession.currPage += 1;
-    this.setProgressBar(
-      (currSession.currPage / (this.state.siteStructure.pages.length - 1)) *
-        100,
-      "Page"
-    );
+    const currType = this.state.siteStructure.pages[currSession.currPage].type;
+    if (currType === "Section") {
+      this.setProgressBar(0, "");
+    } else {
+      this.setProgressBar(
+        (currSession.currPage / (this.state.siteStructure.pages.length - 1)) *
+          100,
+        currSession.currPage +
+          " / " +
+          (this.state.siteStructure.pages.length - 1) +
+          " Page"
+      );
+    }
     if (this.state.siteStructure.pages.length - 1 === currSession.currPage) {
       this.exportStudy();
     }
     this.setState({ currSession: currSession });
   };
 
-  setProgressBar = (value, type) => {
-    this.setState({ progress: value });
+  setProgressBar = (value, label) => {
+    this.setState({ progress: value, progressLabel: label });
   };
 
   grabInformation = (data) => {
@@ -73,7 +81,10 @@ class Section extends React.Component {
       <MyDiv>
         <MyContainer>
           <Navbar expand="lg" variant="light" bg="light">
-            <MyProgressBar now={this.state.progress} barColor="green" />
+            <MyProgressBar
+              now={this.state.progress}
+              label={this.state.progressLabel}
+            />
           </Navbar>
           <Pages
             siteStructure={this.state.siteStructure}

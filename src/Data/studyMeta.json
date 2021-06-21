@@ -1,6 +1,6 @@
 {
   "meta": {
-    "progressbar": true,
+    "progressbarSection": true,
     "sessionID" : "Participant ID"
   },
   "pages": [
