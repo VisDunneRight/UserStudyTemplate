@@ -48,14 +48,14 @@ const Length = ({ question, domain }) => {
         chartHeight - question.sizes[4] - question.sizes[1],
         25,
         question.sizes[1],
-        "100",
+        "?",
       ]);
       data.push([
         100,
         chartHeight - question.sizes[3] - question.sizes[0],
         25,
         question.sizes[0],
-        "?",
+        "100",
       ]);
     }
 

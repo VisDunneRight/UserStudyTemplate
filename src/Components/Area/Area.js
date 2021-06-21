@@ -5,7 +5,7 @@ import "./style.css";
 
 const margin = { top: 20, right: 30, bottom: 30, left: 30 };
 
-const posX = [150, 400];
+const posX = [150, 420];
 const posY = [150, 150];
 
 const Area = ({ question, domain }) => {
@@ -29,8 +29,8 @@ const Area = ({ question, domain }) => {
       data.push([posX[0], chartHeight - posY[0], question.sizes[0], "100"]);
       data.push([posX[1], chartHeight - posY[1], question.sizes[1], "?"]);
     } else {
-      data.push([posX[0], chartHeight - posY[0], question.sizes[1], "100"]);
-      data.push([posX[1], chartHeight - posY[1], question.sizes[0], "?"]);
+      data.push([posX[0], chartHeight - posY[0], question.sizes[1], "?"]);
+      data.push([posX[1], chartHeight - posY[1], question.sizes[0], "100"]);
     }
 
     //Data rename

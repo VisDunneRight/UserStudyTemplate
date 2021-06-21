@@ -46,7 +46,7 @@ const generatePlot = (svg, question, leftTop, rightBottom, name) => {
     .attr("x", (d) => {
       return d[0];
     })
-    .attr("y", (d) => rightBottom[1] + margin.bottom)
+    .attr("y", (d) => d[1] - 10)
     .attr("text-anchor", "middle");
 };
 
@@ -67,8 +67,8 @@ const Poua = ({ question, domain }) => {
       data.push([question.sizes[0], "100"]);
       data.push([question.sizes[1], "?"]);
     } else {
-      data.push([question.sizes[1], "100"]);
-      data.push([question.sizes[0], "?"]);
+      data.push([question.sizes[1], "?"]);
+      data.push([question.sizes[0], "100"]);
     }
     generatePlot(
       svg,

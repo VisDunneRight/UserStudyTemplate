@@ -31,8 +31,8 @@ const Poca = ({ question, domain }) => {
       data.push([posX[0], chartHeight - question.sizes[0], "100"]);
       data.push([posX[1], chartHeight - question.sizes[1], "?"]);
     } else {
-      data.push([posX[0], chartHeight - question.sizes[1], "100"]);
-      data.push([posX[1], chartHeight - question.sizes[0], "?"]);
+      data.push([posX[0], chartHeight - question.sizes[1], "?"]);
+      data.push([posX[1], chartHeight - question.sizes[0], "100"]);
     }
 
     //Data rename
@@ -63,7 +63,7 @@ const Poca = ({ question, domain }) => {
       .attr("x", (d) => {
         return d[0];
       })
-      .attr("y", (d) => height)
+      .attr("y", (d) => d[1] - 10)
       .attr("text-anchor", "middle");
   }, [dimensions, domain, question]);
 

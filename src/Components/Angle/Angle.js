@@ -5,6 +5,8 @@ import "./style.css";
 
 const margin = { top: 20, right: 30, bottom: 30, left: 30 };
 const cordLength = 80;
+const xPos = 100;
+const yPos = 100;
 
 const drawAngle = (g, svg, data, translate, name, symbol) => {
   const radialLineGen = d3.lineRadial();
@@ -28,7 +30,7 @@ const drawAngle = (g, svg, data, translate, name, symbol) => {
     .attr("class", "mytooltip_" + name)
     .text((d) => symbol)
     .attr("x", (d) => d[0])
-    .attr("y", (d) => d[1] + cordLength + margin.bottom / 2)
+    .attr("y", (d) => d[1] + cordLength + margin.bottom / 2 + 4)
     .attr("text-anchor", "middle");
 };
 
@@ -48,25 +50,44 @@ const Angle = ({ question, domain }) => {
     svg.attr("viewBox", [0, 0, width, height]);
     const g = svg.select("g");
 
-    console.log("test");
+    const radians = (value) => {
+      return (value * Math.PI) / 180;
+    };
+
     let data = [];
     if (question.sizes[2] === 0) {
-      data.push([question.sizes[3], cordLength]);
-      data.push([question.sizes[3], 0]);
-      data.push([question.sizes[3] + question.sizes[0], cordLength]);
-      data.push([question.sizes[4], cordLength]);
-      data.push([question.sizes[4], 0]);
-      data.push([question.sizes[4] + question.sizes[1], cordLength]);
+      data.push([radians(question.sizes[3]), cordLength]);
+      data.push([radians(question.sizes[3]), 0]);
+      data.push([radians(question.sizes[3] + question.sizes[0]), cordLength]);
+      data.push([radians(question.sizes[4]), cordLength]);
+      data.push([radians(question.sizes[4]), 0]);
+      data.push([radians(question.sizes[4] + question.sizes[1]), cordLength]);
+      drawAngle(g, svg, data.slice(0, 3), [xPos, yPos], "radial1", "100");
+      drawAngle(
+        g,
+        svg,
+        data.slice(3, 6),
+        [xPos + cordLength * 2.1, yPos],
+        "radial2",
+        "?"
+      );
     } else {
-      data.push([question.sizes[4], cordLength]);
-      data.push([question.sizes[4], 0]);
-      data.push([question.sizes[4] + question.sizes[1], cordLength]);
-      data.push([question.sizes[3], cordLength]);
-      data.push([question.sizes[3], 0]);
-      data.push([question.sizes[3] + question.sizes[1], cordLength]);
+      data.push([radians(question.sizes[4]), cordLength]);
+      data.push([radians(question.sizes[4]), 0]);
+      data.push([radians(question.sizes[4] + question.sizes[1]), cordLength]);
+      data.push([radians(question.sizes[3]), cordLength]);
+      data.push([radians(question.sizes[3]), 0]);
+      data.push([radians(question.sizes[3] + question.sizes[0]), cordLength]);
+      drawAngle(g, svg, data.slice(0, 3), [xPos, yPos], "radial1", "?");
+      drawAngle(
+        g,
+        svg,
+        data.slice(3, 6),
+        [xPos + cordLength * 2.1, yPos],
+        "radial2",
+        "100"
+      );
     }
-    drawAngle(g, svg, data.slice(0, 3), [100, 100], "radial1", "100");
-    drawAngle(g, svg, data.slice(3, 6), [200, 100], "radial2", "?");
   }, [dimensions, domain, question]);
 
   return (
