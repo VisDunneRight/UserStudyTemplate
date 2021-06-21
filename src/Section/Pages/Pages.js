@@ -4,7 +4,14 @@ import Information from "./Information/Information";
 import Break from "./Break/Break";
 import Section from "./Section/Section";
 
-const Option = ({ page, data, grabInformation, saveAnswer, nextPage }) => {
+const Option = ({
+  page,
+  data,
+  grabInformation,
+  saveAnswer,
+  setProgressBar,
+  nextPage,
+}) => {
   if (page.type === "Demographic") {
     return (
       <Demographics
@@ -21,6 +28,7 @@ const Option = ({ page, data, grabInformation, saveAnswer, nextPage }) => {
         page={page}
         data={data[page.position]}
         saveAnswer={saveAnswer}
+        setProgressBar={setProgressBar}
         nextPage={nextPage}
       />
     );
@@ -40,7 +48,7 @@ const Pages = ({
   sessionID,
   saveAnswer,
   nextPage,
-  exportStudy,
+  setProgressBar,
 }) => {
   return (
     <>
@@ -52,6 +60,7 @@ const Pages = ({
           grabInformation={grabInformation}
           saveAnswer={saveAnswer}
           nextPage={nextPage}
+          setProgressBar={setProgressBar}
         />
       )}
     </>

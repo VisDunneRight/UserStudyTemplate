@@ -7,7 +7,7 @@ import Length from "../../../Components/Length/Length";
 import Poua from "../../../Components/Poua/Poua";
 import { MyRow } from "./style";
 
-const Section = ({ page, data, saveAnswer, nextPage }) => {
+const Section = ({ page, data, saveAnswer, setProgressBar, nextPage }) => {
   const [index, setIndex] = useState(0);
   const [array, setArray] = useState([]);
   const [answer, setAnswer] = useState("");
@@ -17,6 +17,7 @@ const Section = ({ page, data, saveAnswer, nextPage }) => {
       nextPage();
       return;
     }
+    setProgressBar(((index + 1) / (array.length - 1)) * 100, "Question");
     setIndex((currIndex) => {
       return currIndex + 1;
     });

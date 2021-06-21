@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, ProgressBar } from "react-bootstrap";
 import styled from "styled-components";
 
 export const MyContainer = styled(Container)`
@@ -11,4 +11,9 @@ export const MyDiv = styled.div`
   display: flex;
   flex-flow: column;
   min-height: 100vh;
+`;
+
+export const MyProgressBar = styled(ProgressBar)`
+  width: 100vw;
+  color: ${(props) => props.barColor};
 `;

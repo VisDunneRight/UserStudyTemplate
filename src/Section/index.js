@@ -2,12 +2,14 @@ import React from "react";
 import studyData from "../Data/studyData.json";
 import studyMeta from "../Data/studyMeta.json";
 import Pages from "./Pages/Pages";
-import { MyContainer, MyDiv } from "./style";
+import { MyContainer, MyDiv, MyProgressBar } from "./style";
+import { Navbar } from "react-bootstrap";
 
 class Section extends React.Component {
   state = {
     data: {},
     siteStructure: {},
+    progress: 0,
     currSession: { currPage: 0, id: 0 },
     answers: [],
   };
@@ -21,14 +23,19 @@ class Section extends React.Component {
   nextPage = () => {
     const currSession = this.state.currSession;
     currSession.currPage += 1;
-    console.log(
-      this.state.siteStructure.pages.length,
-      currSession.currPage - 1
+    this.setProgressBar(
+      (currSession.currPage / (this.state.siteStructure.pages.length - 1)) *
+        100,
+      "Page"
     );
     if (this.state.siteStructure.pages.length - 1 === currSession.currPage) {
       this.exportStudy();
     }
     this.setState({ currSession: currSession });
+  };
+
+  setProgressBar = (value, type) => {
+    this.setState({ progress: value });
   };
 
   grabInformation = (data) => {
@@ -65,6 +72,9 @@ class Section extends React.Component {
     return (
       <MyDiv>
         <MyContainer>
+          <Navbar expand="lg" variant="light" bg="light">
+            <MyProgressBar now={this.state.progress} barColor="green" />
+          </Navbar>
           <Pages
             siteStructure={this.state.siteStructure}
             currPage={this.state.currSession.currPage}
@@ -73,7 +83,7 @@ class Section extends React.Component {
             grabInformation={this.grabInformation}
             saveAnswer={this.saveAnswer}
             nextPage={this.nextPage}
-            exportStudy={this.exportStudy}
+            setProgressBar={this.setProgressBar}
           />
         </MyContainer>
       </MyDiv>
