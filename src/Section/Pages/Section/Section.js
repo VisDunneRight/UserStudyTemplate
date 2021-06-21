@@ -17,7 +17,10 @@ const Section = ({ page, data, saveAnswer, setProgressBar, nextPage }) => {
       nextPage();
       return;
     }
-    setProgressBar(((index + 1) / (array.length - 1)) * 100, "Question");
+    setProgressBar(
+      ((index + 1) / array.length) * 100,
+      index + 1 + " / " + array.length + " Question"
+    );
     setIndex((currIndex) => {
       return currIndex + 1;
     });
@@ -25,6 +28,16 @@ const Section = ({ page, data, saveAnswer, setProgressBar, nextPage }) => {
 
   function handleNextQuestion(event) {
     event.preventDefault();
+    if (answer === "") {
+      alert("Please type a number before hitting next.");
+      return;
+    } else if (isNaN(Number(answer)) === true) {
+      alert("Please make sure to type a number before hitting next.");
+      return;
+    } else if (Number(answer) < 0 || Number(answer) > 100) {
+      alert("The number must be between 0 and 100.");
+      return;
+    }
     const answerName = data.answerName[index].toString();
     saveAnswer(answerName, answer);
     setAnswer("");
