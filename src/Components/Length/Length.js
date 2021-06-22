@@ -71,24 +71,28 @@ const Length = ({ question, domain }) => {
       .attr("height", (d) => d[3])
       .attr("fill", "black");
 
-    const axisLine = d3.line();
-    g.selectAll("path")
-      .data([axis])
-      .join("path")
-      .attr("d", (value) => axisLine(value))
-      .attr("fill", "none")
-      .attr("stroke", "black");
+    // const axisLine = d3.line();
+    // g.selectAll("path")
+    //   .data([axis])
+    //   .join("path")
+    //   .attr("d", (value) => axisLine(value))
+    //   .attr("fill", "none")
+    //   .attr("stroke", "black");
 
     g.selectAll(".mytooltip")
       .data(data)
       .join("text")
       .style("opacity", 1)
+      .style("fill", "white")
+      .style("stroke", "white")
+      .style("font", "14px sans-serif")
       .attr("class", "mytooltip")
       .text((d) => d[4])
       .attr("x", (d) => {
         return d[0] + d[2] / 2;
       })
-      .attr("y", (d) => height)
+      
+      .attr("y", (d) => d[1] + d[3]/2 - 5 )
       .attr("text-anchor", "middle");
   }, [dimensions, domain, question]);
 
