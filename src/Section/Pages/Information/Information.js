@@ -1,7 +1,7 @@
 import { Col, Button } from "react-bootstrap";
 import { MyRow } from "./style";
 
-const Information = ({ page, nextPage }) => {
+const Information = ({ page, nextPage, exportStudy }) => {
   return (
     <>
       <MyRow>
@@ -13,7 +13,13 @@ const Information = ({ page, nextPage }) => {
         <br />
       </MyRow>
       {page.finish === true ? (
-        <></>
+        <MyRow>
+          <Col>
+            <Button variant="secondary" onClick={exportStudy}>
+              Download File
+            </Button>{" "}
+          </Col>
+        </MyRow>
       ) : (
         <MyRow>
           <Col>

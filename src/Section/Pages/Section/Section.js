@@ -7,24 +7,9 @@ import Length from "../../../Components/Length/Length";
 import Poua from "../../../Components/Poua/Poua";
 import { MyRow } from "./style";
 
-const Section = ({ page, data, saveAnswer, setProgressBar, nextPage }) => {
-  const [index, setIndex] = useState(0);
+const Section = ({ page, data, saveAnswer, nextQuestion, questionIndex }) => {
   const [array, setArray] = useState([]);
   const [answer, setAnswer] = useState("");
-
-  const nextQuestion = () => {
-    if (index + 1 === array.length) {
-      nextPage();
-      return;
-    }
-    setProgressBar(
-      ((index + 1) / array.length) * 100,
-      index + 1 + " / " + array.length + " Question"
-    );
-    setIndex((currIndex) => {
-      return currIndex + 1;
-    });
-  };
 
   function handleNextQuestion(event) {
     event.preventDefault();
@@ -38,10 +23,10 @@ const Section = ({ page, data, saveAnswer, setProgressBar, nextPage }) => {
       alert("The number must be between 0 and 100.");
       return;
     }
-    const answerName = data.answerName[index].toString();
+    const answerName = data.answerName[questionIndex].toString();
     saveAnswer(answerName, answer);
     setAnswer("");
-    nextQuestion();
+    nextQuestion(array.length);
   }
 
   function onChange(value) {
@@ -105,8 +90,8 @@ const Section = ({ page, data, saveAnswer, setProgressBar, nextPage }) => {
 
   return (
     <>
-      <MyRow>{typeRendering(data, array, index, data.Domain)}</MyRow>
-      <MyRow>{array[index] && array[index].Question}</MyRow>
+      <MyRow>{typeRendering(data, array, questionIndex, data.Domain)}</MyRow>
+      <MyRow>{array[questionIndex] && array[questionIndex].Question}</MyRow>
       <MyRow>
         <Col md={2}>
           <Form.Control

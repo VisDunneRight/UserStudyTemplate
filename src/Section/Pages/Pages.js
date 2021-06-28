@@ -9,7 +9,9 @@ const Option = ({
   data,
   grabInformation,
   saveAnswer,
-  setProgressBar,
+  questionIndex,
+  exportStudy,
+  nextQuestion,
   nextPage,
 }) => {
   if (page.type === "Demographic") {
@@ -21,15 +23,17 @@ const Option = ({
       />
     );
   } else if (page.type === "Information") {
-    return <Information page={page} nextPage={nextPage} />;
+    return (
+      <Information page={page} nextPage={nextPage} exportStudy={exportStudy} />
+    );
   } else if (page.type === "Section") {
     return (
       <Section
         page={page}
         data={data[page.position]}
         saveAnswer={saveAnswer}
-        setProgressBar={setProgressBar}
-        nextPage={nextPage}
+        questionIndex={questionIndex}
+        nextQuestion={nextQuestion}
       />
     );
   } else if (page.type === "Break") {
@@ -48,7 +52,9 @@ const Pages = ({
   sessionID,
   saveAnswer,
   nextPage,
-  setProgressBar,
+  exportStudy,
+  nextQuestion,
+  questionIndex,
 }) => {
   return (
     <>
@@ -59,8 +65,10 @@ const Pages = ({
           data={data[sessionID]}
           grabInformation={grabInformation}
           saveAnswer={saveAnswer}
+          exportStudy={exportStudy}
           nextPage={nextPage}
-          setProgressBar={setProgressBar}
+          nextQuestion={nextQuestion}
+          questionIndex={questionIndex}
         />
       )}
     </>
