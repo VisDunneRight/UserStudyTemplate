@@ -2,6 +2,9 @@ import { Col, Button } from "react-bootstrap";
 import { MyRow } from "./style";
 
 const Information = ({ page, nextPage, exportStudy }) => {
+  if (page.finish === true) {
+    localStorage.clear();
+  }
   return (
     <>
       <MyRow>
