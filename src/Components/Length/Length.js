@@ -4,6 +4,7 @@ import useResizeObserver from "../useResizeObserver";
 import "./style.css";
 
 const margin = { top: 20, right: 30, bottom: 30, left: 30 };
+const xPos = [50, 100];
 
 const Length = ({ question, domain }) => {
   const svgRef = useRef();
@@ -29,14 +30,14 @@ const Length = ({ question, domain }) => {
     let data = [];
     if (question.sizes[2] === 0) {
       data.push([
-        50,
+        xPos[0],
         chartHeight - question.sizes[3] - question.sizes[0],
         25,
         question.sizes[0],
         "100",
       ]);
       data.push([
-        100,
+        xPos[1],
         chartHeight - question.sizes[4] - question.sizes[1],
         25,
         question.sizes[1],
@@ -44,14 +45,14 @@ const Length = ({ question, domain }) => {
       ]);
     } else {
       data.push([
-        50,
+        xPos[0],
         chartHeight - question.sizes[4] - question.sizes[1],
         25,
         question.sizes[1],
         "?",
       ]);
       data.push([
-        100,
+        xPos[1],
         chartHeight - question.sizes[3] - question.sizes[0],
         25,
         question.sizes[0],
@@ -83,16 +84,18 @@ const Length = ({ question, domain }) => {
       .data(data)
       .join("text")
       .style("opacity", 1)
-      .style("fill", "white")
-      .style("stroke", "white")
       .style("font", "14px sans-serif")
       .attr("class", "mytooltip")
       .text((d) => d[4])
       .attr("x", (d) => {
-        return d[0] + d[2] / 2;
+        if (d[0] === xPos[0]) {
+          return d[0] - 20;
+        } else {
+          return d[0] + d[2] + 10;
+        }
       })
-      
-      .attr("y", (d) => d[1] + d[3]/2 - 5 )
+
+      .attr("y", (d) => d[1] + d[3] / 2 - 5)
       .attr("text-anchor", "middle");
   }, [dimensions, domain, question]);
 
