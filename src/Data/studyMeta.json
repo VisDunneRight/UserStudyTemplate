@@ -25,6 +25,10 @@
           "Type": "text"
         },
         {
+          "label": "Participant Gender",
+          "Type": "text"
+        },
+        {
           "label": "Participant Race",
           "Type": "text"
         },

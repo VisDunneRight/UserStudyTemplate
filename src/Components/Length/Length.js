@@ -91,11 +91,11 @@ const Length = ({ question, domain }) => {
         if (d[0] === xPos[0]) {
           return d[0] - 20;
         } else {
-          return d[0] + d[2] + 10;
+          return d[0] + d[2] + 15;
         }
       })
 
-      .attr("y", (d) => d[1] + d[3] / 2 - 5)
+      .attr("y", (d) => d[1] + d[3] / 2)
       .attr("text-anchor", "middle");
   }, [dimensions, domain, question]);
 
