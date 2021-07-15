@@ -43,6 +43,9 @@ class Section extends React.Component {
     const dataAnswer = this.state.data[this.state.currSession.id - 1];
 
     let results = [];
+    if (dataAnswer === undefined) {
+      return;
+    }
     dataAnswer.map((type, index) => {
       const currType = type.type;
       let total = 0.0;
