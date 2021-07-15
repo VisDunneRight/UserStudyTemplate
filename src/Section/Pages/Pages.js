@@ -13,6 +13,7 @@ const Option = ({
   exportStudy,
   nextQuestion,
   nextPage,
+  results,
 }) => {
   if (page.type === "Demographic") {
     return (
@@ -24,7 +25,12 @@ const Option = ({
     );
   } else if (page.type === "Information") {
     return (
-      <Information page={page} nextPage={nextPage} exportStudy={exportStudy} />
+      <Information
+        page={page}
+        nextPage={nextPage}
+        exportStudy={exportStudy}
+        results={results}
+      />
     );
   } else if (page.type === "Section") {
     return (
@@ -55,6 +61,7 @@ const Pages = ({
   exportStudy,
   nextQuestion,
   questionIndex,
+  results,
 }) => {
   return (
     <>
@@ -69,6 +76,7 @@ const Pages = ({
           nextPage={nextPage}
           nextQuestion={nextQuestion}
           questionIndex={questionIndex}
+          results={results}
         />
       )}
     </>

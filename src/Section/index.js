@@ -12,6 +12,7 @@ class Section extends React.Component {
     progress: 0,
     currSession: { currPage: 0, id: 0, questionIndex: 0 },
     answers: [],
+    results: [],
   };
 
   componentDidMount() {
@@ -38,6 +39,25 @@ class Section extends React.Component {
     }
   }
 
+  calculateAccuracy = () => {
+    const dataAnswer = this.state.data[this.state.currSession.id - 1];
+    let results = [];
+    dataAnswer.map((type, index) => {
+      const currType = type.type;
+      let total = 0.0;
+      for (let i = 0; i < 19; i++) {
+        const answerLst = this.state.answers[i + index * 19];
+        const answer = parseFloat(answerLst[0].split(",")[1]);
+        total += Math.abs(answer * 100 - parseInt(answerLst[1]));
+      }
+      results.push([currType, total]);
+    });
+    results.sort(function (a, b) {
+      return a[1] - b[1];
+    });
+    this.setState({ results: results });
+  };
+
   nextPage = () => {
     const currSession = this.state.currSession;
     currSession.currPage += 1;
@@ -56,6 +76,7 @@ class Section extends React.Component {
     //   );
     // }
     if (this.state.siteStructure.pages.length - 1 === currSession.currPage) {
+      this.calculateAccuracy();
       this.exportStudy();
     }
     localStorage.setItem("currSession", JSON.stringify(currSession));
@@ -103,6 +124,7 @@ class Section extends React.Component {
   };
 
   exportStudy = () => {
+    this.calculateAccuracy();
     var FileSaver = require("file-saver");
 
     let jsonFile = {
@@ -144,6 +166,7 @@ class Section extends React.Component {
             nextPage={this.nextPage}
             nextQuestion={this.nextQuestion}
             exportStudy={this.exportStudy}
+            results={this.state.results}
             questionIndex={
               this.state.currSession != null
                 ? this.state.currSession.questionIndex
