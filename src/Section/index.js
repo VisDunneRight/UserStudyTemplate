@@ -40,17 +40,21 @@ class Section extends React.Component {
   }
 
   calculateAccuracy = () => {
-    const dataAnswer = this.state.data[this.state.currSession.id - 1];
+    const dataAnswer = this.state.data[this.state.currSession.id];
 
     let results = [];
     if (dataAnswer === undefined) {
       return;
     }
+    console.log(dataAnswer);
     dataAnswer.map((type, index) => {
       const currType = type.type;
       let total = 0.0;
-      for (let i = 0; i < 19; i++) {
-        const answerLst = this.state.answers[i + index * 19];
+      const size = type.answerName.length;
+      for (let i = 0; i < size; i++) {
+        const answerLst = this.state.answers[i + index * size];
+        console.log(answerLst);
+        console.log(i + index * size, this.state.answers);
         const answer = parseFloat(answerLst[0].split(",")[1]);
         total += Math.abs(answer * 100 - parseInt(answerLst[1]));
       }
@@ -79,12 +83,12 @@ class Section extends React.Component {
     //       (this.state.siteStructure.pages.length - 1)
     //   );
     // }
+    localStorage.setItem("currSession", JSON.stringify(currSession));
+    this.setState({ currSession: currSession });
     if (this.state.siteStructure.pages.length - 1 === currSession.currPage) {
       this.exportStudy();
       this.calculateAccuracy();
     }
-    localStorage.setItem("currSession", JSON.stringify(currSession));
-    this.setState({ currSession: currSession });
   };
 
   setProgressBar = (value, label) => {
@@ -125,6 +129,7 @@ class Section extends React.Component {
     newAnswers.push([field, answer]);
     localStorage.setItem("answers", JSON.stringify(newAnswers));
     this.setState({ answers: newAnswers });
+    return Promise.resolve(newAnswers);
   };
 
   exportStudy = () => {

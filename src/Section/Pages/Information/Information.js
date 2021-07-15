@@ -37,7 +37,7 @@ const RenderResults = ({ results }) => {
 
 const Information = ({ page, nextPage, exportStudy, results }) => {
   if (page.finish === true) {
-    localStorage.clear();
+    // localStorage.clear();
   }
   return (
     <>
