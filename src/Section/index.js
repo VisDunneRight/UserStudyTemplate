@@ -41,6 +41,7 @@ class Section extends React.Component {
 
   calculateAccuracy = () => {
     const dataAnswer = this.state.data[this.state.currSession.id - 1];
+
     let results = [];
     dataAnswer.map((type, index) => {
       const currType = type.type;
@@ -76,8 +77,8 @@ class Section extends React.Component {
     //   );
     // }
     if (this.state.siteStructure.pages.length - 1 === currSession.currPage) {
-      this.calculateAccuracy();
       this.exportStudy();
+      this.calculateAccuracy();
     }
     localStorage.setItem("currSession", JSON.stringify(currSession));
     this.setState({ currSession: currSession });
