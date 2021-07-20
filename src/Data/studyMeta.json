@@ -41,12 +41,24 @@
     {
       "title": "",
       "type": "Information",
-      "text": [
-        "Hey, thanks for helping us out today.",
-        "Your going to answer some question now just like the ones we practiced. There are no right or wrong answers so just answer them as quick as you can with your best guess. ",
-        "After you answer each question hit the “Next” button in the bottom right corner. There will be five sections total to go through. When you see a page that says “All Done” call Amy over. ",
-        "Remember, you are being a huge help and if you want to stop or need a break for any reason just tell Amy. ",
-        "When your ready, hit the start button to begin. "
+      "html": [
+        { "image": {
+            "src":"explanation1.png",
+            "width": 800,
+            "caption":""
+          }
+        }
+      ]
+    },
+    {
+      "title": "",
+      "type": "Information",
+      "html": [
+        {"p": "Hey, thanks for helping us out today."},
+        {"p":"Your going to answer some question now just like the ones we practiced. There are no right or wrong answers so just answer them as quick as you can with your best guess. "},
+        {"p":"After you answer each question hit the “Next” button in the bottom right corner. There will be five sections total to go through. When you see a page that says “All Done” call Amy over. "},
+        {"p":"Remember, you are being a huge help and if you want to stop or need a break for any reason just tell Amy. "},
+        {"p":"When your ready, hit the start button to begin. "}
       ]
     },
     {
@@ -58,10 +70,10 @@
     {
       "title": "",
       "type": "Information",
-      "text": [
-        "You are done with section 1 of 5!.",
-        "Feel free to take a short break and relax for a little bit.",
-        "When you are ready, click the start button below to begin section 2 of 5."
+      "html": [
+        {"p":"You are done with section 1 of 5!."},
+        {"p":"Feel free to take a short break and relax for a little bit."},
+        {"p":"When you are ready, click the start button below to begin section 2 of 5."}
       ]
     },
     {
@@ -73,10 +85,10 @@
     {
       "title": "",
       "type": "Information",
-      "text": [
-        "You are done with section 2 of 5!",
-        "Feel free to take a short break and relax for a little bit.",
-        "When you are ready, click the start button below to begin section 3 of 5."
+      "html": [
+        {"p":"You are done with section 2 of 5!"},
+        {"p":"Feel free to take a short break and relax for a little bit."},
+        {"p":"When you are ready, click the start button below to begin section 3 of 5."}
       ]
     },
     {
@@ -88,10 +100,10 @@
     {
       "title": "",
       "type": "Information",
-      "text": [
-        "You are done with section 3 of 5!",
-        "Feel free to take a short break and relax for a little bit.",
-        "When you are ready, click the start button below to begin section 4 of 5."
+      "html": [
+        {"p":"You are done with section 3 of 5!"},
+        {"p":"Feel free to take a short break and relax for a little bit."},
+        {"p":"When you are ready, click the start button below to begin section 4 of 5."}
       ]
     },
     {
@@ -103,10 +115,10 @@
     {
       "title": "",
       "type": "Information",
-      "text": [
-        "You are done with section 4 of 5!",
-        "Feel free to take a short break and relax for a little bit.",
-        "When you are ready, click the start button below to begin section 5 of 5."
+      "html": [
+        {"p":"You are done with section 4 of 5!"},
+        {"p":"Feel free to take a short break and relax for a little bit."},
+        {"p":"When you are ready, click the start button below to begin section 5 of 5."}
       ]
     },
     {
@@ -119,9 +131,9 @@
       "title": "All Done. Please tell Amy that you are finished.",
       "type": "Information",
       "finish": true,
-      "text": [
-        "You are done with section 5 of 5!",
-        "That is all the sections!! Thank you for help."
+      "html": [
+        {"p":"You are done with section 5 of 5!"},
+        {"p":"That is all the sections!! Thank you for help."}
       ]
     }
   ]

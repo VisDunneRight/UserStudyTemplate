@@ -1,4 +1,4 @@
-import { Col, Button, Image } from "react-bootstrap";
+import { Col, Button, Image, Figure } from "react-bootstrap";
 import { MyRow } from "./style";
 
 const TypeImage = ({ type }) => {
@@ -35,6 +35,29 @@ const RenderResults = ({ results }) => {
   );
 };
 
+const TypeSwitch = ({ data }) => {
+  console.log(data);
+  if (data.p) {
+    return <MyRow>{data.p}</MyRow>;
+  } else if (data.image) {
+    const image = data.image;
+    return (
+      <MyRow>
+        <Figure>
+          <Figure.Image
+            height={image.height ? image.height : "100%"}
+            width={image.width ? image.width : "100%"}
+            src={process.env.PUBLIC_URL + "/" + image.src}
+          />
+          <Figure.Caption>{image.caption}</Figure.Caption>
+        </Figure>
+      </MyRow>
+    );
+  } else {
+    return <></>;
+  }
+};
+
 const Information = ({ page, nextPage, exportStudy, results }) => {
   if (page.finish === true) {
     // localStorage.clear();
@@ -44,8 +67,10 @@ const Information = ({ page, nextPage, exportStudy, results }) => {
       <MyRow>
         <h1>{page.title}</h1>
       </MyRow>
-      {page.text &&
-        page.text.map((line, index) => <MyRow key={index}>{line}</MyRow>)}
+      {page.html &&
+        page.html.map((line, index) => (
+          <TypeSwitch key={index} data={line}></TypeSwitch>
+        ))}
       <MyRow>
         <br />
       </MyRow>
